@@ -106,6 +106,16 @@ export default function MenuChatbot() {
         )}
       </button>
 
+      {/* Message incitatif qui apparaît automatiquement */}
+      {!isOpen && (
+        <div className="fixed bottom-24 right-6 z-50 animate-bounce-slow">
+          <div className="bg-white text-background-dark text-sm font-bold px-4 py-3 rounded-xl shadow-2xl max-w-[200px] relative animate-fade-in-up">
+            <div className="absolute -bottom-2 right-8 w-4 h-4 bg-white transform rotate-45" />
+            <p className="relative z-10">Besoin d&apos;aide pour choisir? Discutez avec moi! 💬</p>
+          </div>
+        </div>
+      )}
+
       {/* Fenêtre du chatbot */}
       {isOpen && (
         <div className="fixed bottom-24 right-6 z-50 w-[380px] h-[600px] bg-surface-dark rounded-2xl shadow-2xl border border-white/10 flex flex-col overflow-hidden animate-scale-in">

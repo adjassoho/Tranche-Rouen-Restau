@@ -5,6 +5,7 @@ import { useState } from "react";
 
 export default function ReservationPage() {
   const [selectedTable, setSelectedTable] = useState<number | null>(12);
+  const [isChatVisible, setIsChatVisible] = useState(true);
 
   return (
     <div className="bg-background-dark text-white h-screen flex flex-col overflow-hidden font-display">
@@ -27,6 +28,16 @@ export default function ReservationPage() {
               </button>
             </div>
           </div>
+
+          {/* Toggle Chat Button (Mobile Only) */}
+          <button
+            onClick={() => setIsChatVisible(!isChatVisible)}
+            className="md:hidden absolute top-6 right-6 z-30 bg-primary hover:bg-red-700 text-white p-3 rounded-full shadow-lg transition-all flex items-center gap-2"
+          >
+            <span className="material-symbols-outlined">
+              {isChatVisible ? 'close' : 'chat'}
+            </span>
+          </button>
 
           {/* Context Info */}
           <div className="absolute bottom-8 left-8 z-20">
@@ -82,7 +93,9 @@ export default function ReservationPage() {
         </section>
 
         {/* AI Concierge Panel */}
-        <aside className="w-[400px] flex-none bg-surface-dark border-l border-surface-accent flex flex-col shadow-2xl z-30 animate-slide-in-right">
+        <aside className={`w-full md:w-[400px] flex-none bg-surface-dark border-l border-surface-accent flex flex-col shadow-2xl z-30 animate-slide-in-right absolute md:relative inset-0 md:inset-auto transition-transform duration-300 ${
+          isChatVisible ? 'translate-x-0' : 'translate-x-full md:translate-x-0'
+        }`}>
           <div className="p-6 border-b border-surface-accent flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="relative">
@@ -96,6 +109,12 @@ export default function ReservationPage() {
                 <p className="text-text-dim text-xs mt-1">En ligne • Temps de réponse &lt; 1s</p>
               </div>
             </div>
+            <button
+              onClick={() => setIsChatVisible(false)}
+              className="md:hidden text-gray-400 hover:text-white transition-colors"
+            >
+              <span className="material-symbols-outlined">close</span>
+            </button>
           </div>
 
           <div className="flex-1 overflow-y-auto p-6 space-y-6 scrollbar-hide">
